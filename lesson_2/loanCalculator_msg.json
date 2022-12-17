@@ -1,0 +1,31 @@
+{
+  "en": {
+    "language" : ">> What language do you speak?\n>> 1) English\n>> 2) Español",
+    "greeting" : ">> Hello! Welcome to the loan calculator!\n>> You can quit anytime by inputting the letter Q on your keyboard!\n",
+    "loanAmount" : ">> What is your current loan amount?\n>> Please enter the value in numbers, such as: '320.5'",
+    "aprAmount" : ">> What is your current APR (Annual Percentage Rate?)\n>> Please enter your value in the following format: '5' for 5%",
+    "inputInvalid" : ">> I'm sorry, that input was not valid. Please try again!",
+    "loanLength" : ">> How long is currently left on your loan?\n>> Please enter the values months. For example, 13 is 1 year, 1 month. 5 is 5 months.",
+    "results" : ">> Your next payment is: ",
+    "again" : ">> Input Q if you wish to exit! Otherwise, let's calculate another loan! Input anything to continue!",
+    "goodbye" : ">> Thank you for using the loan calculator! Have a wonderful day!"
+  },
+  "es": {
+    "greeting" : ">> Lo siento, solo hablo un poco de español, así que confío en el traductor de Google.\n>> Puede salir de la aplicación escribiendo Q!\n>> Bienvenido a la calculadora de préstamos",
+    "loanAmount" : ">> ¿Cuál es el monto actual de su préstamo?\n>> Introduzca el valor en números, como: '320.5'",
+    "aprAmount" : ">> ¿Cuál es su APR actual?\n>> Por favor ingrese su valor en el siguiente formato: '5' por 5%",
+    "inputInvalid" : ">> Lo sentimos, esa entrada no era válida. ¡Intentar otra vez!",
+    "loanLength" : ">> ¿Cuánto tiempo le queda actualmente en su préstamo?\n>> Introduzca los valores del mes. Por ejemplo, 13 es 1 año, un mes. 5 son cinco meses.",
+    "results" : ">> Su próximo pago es: ",
+    "again" : ">> ¿¡Introduce Q si quieres salir! De lo contrario, ¡calculemos otro préstamo! ¡Ingrese cualquier otra cosa para continuar!",
+    "goodbye" : ">> ¡Gracias por usar la calculadora de préstamos! ¡Ten un día maravilloso!"
+
+
+
+
+
+  }
+
+
+
+}

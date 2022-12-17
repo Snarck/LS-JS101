@@ -1,6 +1,6 @@
 const msg = require('./calculator_messages.json');
 const rl = require('readline-sync');
-let lang = "en";
+//let lang = "en";
 
 function lng(message, lang='en') {
   return msg[lang][message];
