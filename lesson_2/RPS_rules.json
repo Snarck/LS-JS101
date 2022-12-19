@@ -1,0 +1,58 @@
+{
+  "rock":{
+    "winsAgainst":  ["scissors", "lizard"],
+    "losesAgainst": ["paper", "spock"],
+    "scissors": "Rock smashes Scissors! You win!",
+    "lizard": "Rock smooshes Lizard! You win!",
+    "paper": "Paper covers Rock! Ouch! You lose!",
+    "spock": "Spock vaporizes Rock! Sorry bout it. You lose!",
+    "rock": "It's a draw!"
+  },
+  "paper":{
+    "winsAgainst": ["rock", "spock"],
+    "losesAgainst": ["scissors", "lizard" ],
+    "rock": "Paper covers Rock! Smooth. You win!",
+    "spock": "Paper disproves Spock! You win!",
+    "scissors": "Scissors cut your Paper! You lose",
+    "lizard": "Your Paper is being digested by the Lizard! You lose!",
+    "paper": "It's a draw!"
+  },
+  "scissors":{
+    "winsAgainst": ["lizard", "paper"],
+    "losesAgainst": ["rock", "spock"],
+    "lizard": "Your Scissors left the Lizard's head rolling! You win!",
+    "paper": "Your Scissors sliced through the competition, defeating Paper! You win!",
+    "rock": "The Rock crumpled your paper! You lose!",
+    "spock": "Spock angrily smashes your Scissors! You lose!",
+    "scissors": "It's a draw!"
+  },
+  "spock":{
+    "winsAgainst": ["scissors", "rock"],
+    "losesAgainst": ["lizard", "paper"],
+    "scissors": "Spock sets phaser to 'Destroy Office Supplies' and defeats Scissors! You win!",
+    "rock": "Spock vaporizes Rock! You win!",
+    "lizard": "The sneaky Lizard poisoned your Spock! You lose!",
+    "paper": "Spock was disproved by the Paper! You lose!",
+    "spock": "It's a draw!"
+  },
+  "lizard":{
+    "winsAgainst": ["spock", "paper"],
+    "losesAgainst": ["rock", "scissors"],
+    "spock": "Your Lizard used Poison! It was super effective! Spock fainted.  You win!",
+    "paper": "Your Lizard ate the Paper! You win!",
+    "rock": "Your Lizard was squished by the Rock! You lose!",
+    "scissors": "Your lizard was decapitated by the Scissors! Ouch! You lose!",
+    "lizard": "It's a draw!"
+  },
+  "grandwinner":{
+    "win": "Congratulations! You won the championship! You're the grand winner!",
+    "lose": "Ahw, shucks! You lost the championship to a computer!"
+  },
+  "menu": {
+    "greeting": "Welcome to Rock Paper Scissors Lizard Spock!",
+    "contents": "Please select one of the following:",
+    "instructions1": "R-P-S-L-SP combines Rock Paper Scissors with the rule of 5!\n=> Introducing two new combatants in the form of Spock and Lizard\n",
+    "instructions2": "Rock beats Scissors and Lizard.\n=> Paper beats Rock and Spock.\n=> Scissors beats Lizard and Paper.\n=> Spock beats Scissors and Rock.\n=> Lizard beats Spock and Paper.\n",
+    "instructions3": "The game continues until someone wins best out of five!\n=> Can you become the new R-P-S-L-SP grand winner?\n\n" 
+  }
+}
