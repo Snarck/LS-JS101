@@ -4,22 +4,22 @@ const wordsArr = [
   "sixteen", "seventeen", "eighteen", "nineteen"
 ]
 
-function wordCompare(num1, num2) {
+function wordSorter(a, b) {
+  let wordA = wordsArr[a];
+  let wordB = wordsArr[b];
 
-  if (wordsArr[num1] > wordsArr[num2]) {
-    return 1
-  } else if (wordsArr[num1] < wordsArr[num2]) {
+  if(wordA < wordB){
     return -1;
+  } else if (wordA > wordB) {
+    return 1;
   } else {
     return 0;
   }
 }
 
-function alphabeticNumberSort(numberArr) {
-  console.log([...numberArr].sort(wordCompare));
+function alphabeticNumberSort(array) {
+  console.log(array.sort(wordSorter));
 }
-
-
 
 alphabeticNumberSort(
   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
