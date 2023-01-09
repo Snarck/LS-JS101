@@ -1,0 +1,16 @@
+{
+  "emojiSupport" : false,
+  "marks" : {
+    "default" : ["X", "O"],
+    "classic" : ["❌", "⭕"],
+    "dogCat" : ["🐶", "🐱"],
+    "fireWater" : ["🔥", "💧"],
+    "cowboyAlien" : ["🤠", "👽"],
+    "moonSun" : ["🌚", "🌞"]
+  },
+  
+  "playerFirst" : true,
+  "difficultyEasy" : false,
+  "difficultyDefault" : true,
+  "difficultyHard" : false 
+}
