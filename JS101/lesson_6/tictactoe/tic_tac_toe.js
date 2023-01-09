@@ -3,6 +3,19 @@ const SETTINGS = require('./tictac_settings.json');
 const PLAYER_MARK = SETTINGS["marks"]["default"][0];
 const CPU_MARK = SETTINGS["marks"]["default"][1];
 
+//settings and menu
+function displayMenu() {
+  //displayMenu here
+}
+
+function displaySettings() {
+  //display Settings here.
+}
+
+function settings() {
+  
+}
+
 //Board Manipulation and intializiation
 function displayBoard(board) {
   const BOARD_OUROBOROS = ("");
@@ -49,7 +62,7 @@ function initializeBoard() {
 
 function initalizeScore() {
   return {
-    userScore : 0,
+    playerScore : 0,
     cpuScore : 0,
     winsNeeded : 2,
     tie : 0,
@@ -57,7 +70,7 @@ function initalizeScore() {
 }
 
 function displayScore(score) {
-  prompt(`Player Wins: ${score.userScore} Computer Wins: ${score.cpuScore}`);
+  prompt(`Player Wins: ${score.playerScore} Computer Wins: ${score.cpuScore}`);
   prompt(`Number of matches resulting in ties: ${score.tie}`);
   prompt(`Playing until someone wins ${score.winsNeeded} games.`);
 }
@@ -72,10 +85,6 @@ function legalSquares (board) {
   }
   return legalSquares;
 }
-// function updateLegalSquares(board, square) {
-//   let removedSquare = board.legalSquares.indexOf(square);
-//   board.legalSquares.splice(removedSquare, 1);
-// }
 
 function gameHeader(board, score) {
   prompt(`You are ${board.playerMark}. Computer is ${board.cpuMark}`);
@@ -149,7 +158,20 @@ function playingAgain() {
 //Handling computer turn:
 function cpuChoosesSquare(board) {
   let moves = legalSquares(board);
+  let cpuChoice = findBestMove(board, moves);
+
+  board[moves[cpuChoice]] = CPU_MARK;
+  // let randomIndex = Math.floor(Math.random() * moves.length);
+  // let cpuSquare = moves[randomIndex];
+  // board[cpuSquare] = CPU_MARK;
+
+  //board[moves[cpuChoice]] = CPU_MARK;
+
+}
+
+function findBestMove(board) {
   let bestScore = -Infinity;
+  let moves = legalSquares(board);
   let cpuChoice;
   for (let idx = 0; idx < moves.length; idx += 1) {
     let previousEntry = board[moves[idx]];
@@ -157,20 +179,14 @@ function cpuChoosesSquare(board) {
     let moveWeight = minimax(board, false);
     board[moves[idx]] = previousEntry;
 
-    console.log(`moveWeight: ${moveWeight}\nIndex: ${idx} ${board[moves[idx]]} `);
     if (moveWeight > bestScore) {
       bestScore = moveWeight;
       cpuChoice = idx;
     }
   }
-  board[moves[cpuChoice]] = CPU_MARK;
-
-  // let cpuSquare =
-  // legalSquares(board)[Math.floor(Math.random() * legalSquares(board).length)];
-  // board[cpuSquare] = board.cpuMark;
-
+  return cpuChoice;
 }
-// eslint-disable-next-line max-lines-per-function, max-statements
+
 function minimax(board, cpuTurn) {
   let scores = {
     Player : -10,
@@ -186,27 +202,39 @@ function minimax(board, cpuTurn) {
   let moves = legalSquares(board);
 
   if (cpuTurn) {
-    let bestScore = -Infinity;
-    for (let idx = 0; idx < moves.length; idx += 1) {
-      let previousEntry = board[moves[idx]];
-      board[moves[idx]] = CPU_MARK;
-      let score = minimax(board, false);
-      board[moves[idx]] = previousEntry;
-      bestScore = Math.max(bestScore, score);
-    }
-    return bestScore;
+    return max(board, moves);
   } else {
-    let bestScore = Infinity;
-    for (let idx = 0; idx < moves.length; idx += 1) {
-      let previousEntry = board[moves[idx]];
-      board[moves[idx]] = PLAYER_MARK;
-      let score = minimax(board, true);
-      board[moves[idx]] = previousEntry;
-      bestScore = Math.min(bestScore, score);
-    }
-    return bestScore;
+    return min(board, moves);
   }
 }
+
+function max(board) {
+  let moves = legalSquares(board);
+  let bestScore = -Infinity;
+  for (let idx = 0; idx < moves.length; idx += 1) {
+    let previousEntry = board[moves[idx]];
+    board[moves[idx]] = CPU_MARK;
+    let score = minimax(board, false);
+    board[moves[idx]] = previousEntry;
+    bestScore = Math.max(bestScore, score);
+  }
+  return bestScore;
+
+}
+
+function min(board) {
+  let moves = legalSquares(board);
+  let bestScore = Infinity;
+  for (let idx = 0; idx < moves.length; idx += 1) {
+    let previousEntry = board[moves[idx]];
+    board[moves[idx]] = PLAYER_MARK;
+    let score = minimax(board, true);
+    board[moves[idx]] = previousEntry;
+    bestScore = Math.min(bestScore, score);
+  }
+  return bestScore;
+
+} // finished handling computer turn
 
 //Resolving the game/score keeping.
 function boardFull(board) {
@@ -225,11 +253,9 @@ function detectWinner(board) {
                 board[sq2] === board.cpuMark &&
                 board[sq3] === board.cpuMark) {
       return 'Computer';
-    } else if (boardFull(board)) {
-      return "tie";
     }
   }
-  return null;
+  return (boardFull(board)) ? "tie" : null;
 }
 
 function someoneWonOrTied(board) {
@@ -238,7 +264,7 @@ function someoneWonOrTied(board) {
 
 function scoreKeeper(score, winner) {
   if (winner === "Player") {
-    score.userScore += 1;
+    score.playerScore += 1;
   } else if (winner === "Computer") {
     score.cpuScore += 1;
   } else {
@@ -248,7 +274,7 @@ function scoreKeeper(score, winner) {
 }
 
 function matchOver(score) {
-  if (score.userScore === score.winsNeeded) {
+  if (score.playerScore === score.winsNeeded) {
     prompt("Player wins the match!");
     return true;
   } else if (score.cpuScore === score.winsNeeded) {
@@ -277,12 +303,12 @@ while (true) {
 
     }
 
-    if (someoneWonOrTied(board)) {
-      scoreKeeper(score, detectWinner(board));
-      if (matchOver(score)) {
-        break;
-      }
+    // if (someoneWonOrTied(board)) {
+    scoreKeeper(score, detectWinner(board));
+    if (matchOver(score)) {
+      break;
     }
+    // }
   }
   if (!playingAgain()) break;
 }
