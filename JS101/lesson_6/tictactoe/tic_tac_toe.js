@@ -481,13 +481,12 @@ while (true) {
       gameHeader(board, score);
       chooseSquare(board, currentPlayer);
       currentPlayer = alternatePlayer(currentPlayer);
+
       if (someoneWonOrTied(board)) {
         gameHeader(board, score);
         break;
       }
-
     }
-
     scoreKeeper(score, detectWinner(board));
     if (matchOver(score)) {
       break;
