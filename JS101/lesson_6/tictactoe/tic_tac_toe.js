@@ -205,16 +205,8 @@ function initializeBoard() {
   };
 }
 
-function getPlayerMark() {
-  if (SETTINGS.playerFirst) {
-    return SETTINGS.marks[SETTINGS.currentMarks][0];
-  } else {
-    return SETTINGS.marks[SETTINGS.currentMarks][1];
-  }
-}
-
-function getCPUMark() {
-  if (!SETTINGS.playerFirst) {
+function getMark(GoingFirst) {
+  if (GoingFirst) {
     return SETTINGS.marks[SETTINGS.currentMarks][0];
   } else {
     return SETTINGS.marks[SETTINGS.currentMarks][1];
@@ -462,35 +454,38 @@ function matchOver(score) {
 
 
 //menu loop
-
 while (true) {
   if (!inMenuSelection()) {
     break;
   }
 }
+
+//outer maingame loop for replay and scorekeeping. Some var instants too.
 while (true) {
   let score = initalizeScore();
+  let playerGoesFirst = SETTINGS.playerFirst;
+
   //main game loop
   while (true) {
-    let currentPlayer = SETTINGS.playerFirst ? "Player" : "Computer";
     let board = initializeBoard();
-    board.playerMark = getPlayerMark();
-    board.cpuMark = getCPUMark();
+    board.playerMark = getMark(playerGoesFirst);
+    board.cpuMark = getMark(!playerGoesFirst);
+    let currentPlayer = playerGoesFirst ? "Player" : "Computer";
 
     while (true) {
       gameHeader(board, score);
       chooseSquare(board, currentPlayer);
       currentPlayer = alternatePlayer(currentPlayer);
 
-      if (someoneWonOrTied(board)) {
-        gameHeader(board, score);
-        break;
-      }
+      if (someoneWonOrTied(board)) break;
     }
+
     scoreKeeper(score, detectWinner(board));
     if (matchOver(score)) {
+      gameHeader(board, score);
       break;
     }
   }
+
   if (!playingAgain()) break;
 }
