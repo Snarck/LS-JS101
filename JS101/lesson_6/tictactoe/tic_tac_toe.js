@@ -205,11 +205,16 @@ function initializeBoard() {
   };
 }
 
-function getMark(GoingFirst) {
-  if (GoingFirst) {
-    return SETTINGS.marks[SETTINGS.currentMarks][0];
-  } else {
-    return SETTINGS.marks[SETTINGS.currentMarks][1];
+function setPlayerMarks(board) {
+  let playerGoingFirst = SETTINGS.playerFirst;
+
+  if (playerGoingFirst) {
+    board.playerMark = SETTINGS.marks[SETTINGS.currentMarks][0];
+    board.cpuMark = SETTINGS.marks[SETTINGS.currentMarks][1];
+  }
+  if (!playerGoingFirst) {
+    board.playerMark = SETTINGS.marks[SETTINGS.currentMarks][1];
+    board.cpuMark = SETTINGS.marks[SETTINGS.currentMarks][0];
   }
 }
 
@@ -463,14 +468,13 @@ while (true) {
 //outer maingame loop for replay and scorekeeping. Some var instants too.
 while (true) {
   let score = initalizeScore();
-  let playerGoesFirst = SETTINGS.playerFirst;
 
   //main game loop
   while (true) {
     let board = initializeBoard();
-    board.playerMark = getMark(playerGoesFirst);
-    board.cpuMark = getMark(!playerGoesFirst);
-    let currentPlayer = playerGoesFirst ? "Player" : "Computer";
+    setPlayerMarks(board);
+    let currentPlayer = SETTINGS.playerFirst ? "Player" : "Computer";
+
 
     while (true) {
       gameHeader(board, score);
